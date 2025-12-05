@@ -4,7 +4,7 @@ import com.example.demo.domain.User;
 import com.example.demo.dto.LoginRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import repository.AccountRepository;
+import com.example.demo.repository.AccountRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -12,9 +12,9 @@ public class LoginService {
     private final AccountRepository userRepository;
 
     public boolean login(LoginRequestDTO request){
-        String email = request.getUser_email();
+        String email = request.getUserEmail();
         String password = request.getPassword();
-        User user = userRepository.findByEmail(email)
+        User user = userRepository.findByUserEmail(email)
                 .orElseThrow(() ->  new IllegalArgumentException(ACCOUNT_SERVICE_ERROR_MESSAGE // 주어진 이메일이 없는 경우
                         .EMAIL_NOT_FOUND.content()));
 

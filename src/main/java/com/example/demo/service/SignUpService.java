@@ -3,11 +3,13 @@ package com.example.demo.service;
 import com.example.demo.domain.User;
 import com.example.demo.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repository.AccountRepository;
+import com.example.demo.repository.AccountRepository;
 
 import java.util.NoSuchElementException;
 
+@Service
 @RequiredArgsConstructor
 public class SignUpService {
     private final AccountRepository userRepository;
@@ -19,23 +21,23 @@ public class SignUpService {
     @Transactional
     public boolean createAccount(UserDTO user){
         isDuplicatedMailAddress(user);
-        User newUser = toDto(user);
+        User newUser = toEntity(user);
         User saved =  userRepository.save(newUser);
         if(saved == null) throw new NoSuchElementException("저장에 문제가 생김.."); // 만약 저장에 문제가 있다면 오류 메시지 출력
         return true;
     }
     private void isDuplicatedMailAddress(UserDTO user){
-        String address = user.getUser_email();
-        if(userRepository.findByEmail(address).isPresent()) throw new IllegalArgumentException(
-                        ACCOUNT_SERVICE_ERROR_MESSAGE. DUPLICATED_ADDRESS.content()); // 중복된 이메일인 경우
+        String address = user.getUserEmail();
+        if(userRepository.findByUserEmail(address).isPresent()) throw new IllegalArgumentException(
+                        ACCOUNT_SERVICE_ERROR_MESSAGE.DUPLICATED_ADDRESS.content()); // 중복된 이메일인 경우
 
     }
 
 
     // helper <- 필요할시 변경
-    private User toDto(UserDTO userDTO){
+    private User toEntity(UserDTO userDTO){
         User user = new User();
-        user.setUser_email(userDTO.getUser_email());
+        user.setUserEmail(userDTO.getUserEmail());
         user.setPassword(userDTO.getPassword());
         user.setName(userDTO.getName());
         user.setGender(userDTO.getGender());

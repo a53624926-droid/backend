@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO { // TODO: setting validations
-    private String user_email;
+    private String userEmail;
     private String password;
     private String name;
     private User.Gender gender;

@@ -1,4 +1,4 @@
-package repository;
+package com.example.demo.repository;
 
 
 import com.example.demo.domain.User;
@@ -10,5 +10,5 @@ import java.util.Optional;
 // Dummy
 @Repository
 public interface AccountRepository extends JpaRepository <User, Long> {
-    Optional<User> findByEmail(String address);
+    Optional<User> findByUserEmail(String address);
 }
