@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class User {
     @Column(nullable = false, length = 40)
     private String userEmail;
 
+    @JsonIgnore
     @Column(nullable = false, length = 30)
     private String password;
 
