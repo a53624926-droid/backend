@@ -12,7 +12,7 @@ import java.util.Map;
 @RequestMapping("/profile")
 @RequiredArgsConstructor
 
-/**
+/*
  * original: -
  * edited (12/08/2025) response entity를 사용해 json 형식으로 반환: 이민영
  */
@@ -38,7 +38,8 @@ public class ProfileController {
         return ResponseEntity.noContent().build();
     }
 
-    // 3) 이메일 변경
+    /*
+      // 3) 이메일 변경
     @PatchMapping("/{userId}/userEmail")
     public ResponseEntity<User> changeUserEmail(
             @PathVariable Long userId,
@@ -48,6 +49,7 @@ public class ProfileController {
         profileService.changeUserEmail(userId, newUserEmail);
         return ResponseEntity.noContent().build();
     }
+    */
 
     // 4) 닉네임 변경
     @PatchMapping("/{userId}/name")

@@ -35,6 +35,7 @@ public class ProfileService {
        userRepository.save(user);
     }
 
+    /*
     // 3) 이메일 변경
     public void changeUserEmail(Long userId, String newUserEmail) {
         User user = userRepository.findById(userId)
@@ -44,6 +45,7 @@ public class ProfileService {
         // @Transactional 덕분에 save() 없어도 flush 되지만, 보기 좋게 남겨두어도 OK
         userRepository.save(user);
     }
+    */
 
     // 4) 닉네임 변경
     public void changeName(Long userId, String newName) {
