@@ -5,6 +5,7 @@ import com.example.demo.dto.LoginUserDTO;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.service.LoginService;
 import com.example.demo.service.SignUpService;
+import com.example.demo.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,17 +20,23 @@ import java.util.Map;
 public class UserController {
     private final LoginService loginService;
     private final SignUpService signUpService;
+    private final JwtUtil jwtUtil;
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginRequestDTO request){
         Map<String, Object> resp = new HashMap<>();
         try{
             LoginUserDTO user  = loginService.login(request);
-            //TODO:  jwt 토큰 생성 <- 의존성 추가해야함
+
+            // JWT 토큰 생성
+            String token = jwtUtil.generateToken(
+                user.getUserId(),
+                user.getName()
+            );
 
             resp.put("success",true);
             resp.put("user",user);
-            resp.put("token"," some token ");
+            resp.put("token",token);
             return ResponseEntity.ok(resp);
         }catch(Exception e){
             // create a response

@@ -7,8 +7,12 @@ spring:
   h2:
     console:
       enabled: true
-    path: /h2-console
+      path: /h2-console
   jpa:
     hibernate:
       ddl-auto: create
     show-sql: true
+
+jwt:
+  secret: your-256-bit-secret-key-change-this-in-production-min-32-characters
+  expiration: 7200000
